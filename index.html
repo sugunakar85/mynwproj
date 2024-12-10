@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapters App</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<nav class="navbar">
+  <ul class="navbar-menu">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Products</a></li>
+    <li><a href="#">Services</a></li>
+    <li><a href="#">Contact</a></li>
+    <li><a href="#">Login</a></li>
+  </ul>
+</nav>
+
+<body>
+  <div class="home-page">
+    <!-- Heading -->
+    <h1>Welcome to the Chapters</h1>
+
+    <!-- Banner Image below heading -->
+    <div class="banner">
+            <div class="banner">
+                <img src="images/bannerimg.jpg" alt="banner image"class="scaled-image">
+            </div>
+           
+    </div>
+
+    <!-- Chapter buttons below the image -->
+    <div id="chapter-buttons" class="chapters-grid">
+      <button class="chapter-btn" onclick="showTopics(1)">Chapter 1</button>
+      <button class="chapter-btn" onclick="showTopics(2)">Cell physio</button>
+      <button class="chapter-btn" onclick="showTopics(3)">Chapter 3</button>
+      <button class="chapter-btn" onclick="showTopics(4)">Chapter 4</button>
+      <button class="chapter-btn" onclick="showTopics(5)">Chapter 5</button>
+      <button class="chapter-btn" onclick="showTopics(6)">Chapter 6</button>
+      <button class="chapter-btn" onclick="showTopics(7)">Chapter 7</button>
+      <button class="chapter-btn" onclick="showTopics(8)">Chapter 8</button>
+      <button class="chapter-btn" onclick="showTopics(9)">Chapter 9</button>
+      <button class="chapter-btn" onclick="showTopics(10)">Chapter 10</button>
+      <button class="chapter-btn" onclick="showTopics(11)">Chapter 11</button>
+      <button class="chapter-btn" onclick="showTopics(12)">Chapter 12</button>
+    </div>
+
+    <!-- Topics container (hidden initially) -->
+    <div id="topics-container" class="topics hidden">
+      <h2 id="chapter-title">Topics for Chapter</h2>
+      <div id="topics">
+        <!-- Topics will be loaded here dynamically -->
+      </div>
+      <button onclick="goBack()" class="back-btn">Back to Chapters</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

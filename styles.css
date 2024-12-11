@@ -1,3 +1,17 @@
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: url('background.jpg') no-repeat center center fixed;
+  background-size: cover;
+  color: #333;
+  line-height: 1.6;
+}
 
 /* Navbar styling */
 .navbar {
@@ -11,8 +25,6 @@
 
 .navbar-menu {
   list-style-type: none;
-  margin: 0;
-  padding: 0;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -27,79 +39,58 @@
   color: white;
   padding: 14px 20px;
   text-decoration: none;
+  transition: background 0.3s ease;
 }
 
 .navbar-menu a:hover {
   background-color: #575757;
 }
 
-.dropdown {
-  position: relative;
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #333;
-  min-width: 160px;
-  z-index: 1;
-}
-
-.dropdown-content a {
-  color: white;
-  padding: 12px;
-  text-decoration: none;
-}
-
-.dropdown:hover .dropdown-content {
-  display: block;
-}
 .banner {
   width: 100%;
-  max-width: 400px;
   margin: 0 auto;
+  max-width: 1000px;
 }
+
 .scaled-image {
   width: 100%;
   height: auto;
-  max-height: 600px; /* Adjust this value for the banner height */
-  object-fit: cover; /* Ensures the image covers the banner space without distortion */
+  object-fit: cover;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: add some shadow for visual effect */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   margin-bottom: 20px;
 }
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: url('background.jpg') no-repeat center center fixed;
-  background-size: cover;
-}
 
+/* Home Page */
 .home-page {
   text-align: center;
-  padding: 20px;
-  color: black;
+  padding: 10px 20px;
+}
+
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
 }
 
 .chapters-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 4 columns */
-  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 15px;
   justify-items: center;
   margin: 20px auto;
-  max-width: 800px; /* Adjust this as needed */
+  max-width: 1000px;
 }
 
 .chapter-btn, .topic-btn, .back-btn {
-  background-color:rgb( 10, 96,254);
+  background-color: rgb(10, 96, 254);
   color: white;
   border: none;
-  padding: 10px 20px;
-  margin: 10px;
-  font-size: 16px;
+  padding: 10px;
+  font-size: 1rem;
   cursor: pointer;
   border-radius: 5px;
-  width: 150px; /* Fixed width for a uniform look */
+  transition: background-color 0.3s ease;
+  text-align: center;
 }
 
 .chapter-btn:hover, .topic-btn:hover, .back-btn:hover {
@@ -118,3 +109,45 @@ body {
   display: block;
   margin: 20px auto;
 }
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+  .navbar-menu {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .navbar-menu li {
+    width: 100%;
+    text-align: center;
+  }
+
+  .chapters-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  .chapter-btn {
+    font-size: 0.9rem;
+    padding: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .chapters-grid {
+    grid-template-columns: 1fr;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  .chapter-btn {
+    font-size: 0.8rem;
+    padding: 6px;
+  }
+}
+

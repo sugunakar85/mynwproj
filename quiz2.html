@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Blood-Multiple choice questions</title>
+                <link rel="stylesheet" href="quiz.css"> <!-- Link to external CSS -->
+                    <!-- Include jsPDF Library -->
+                <script src="lib/jspdf.umd.min.js"></script>
+    </head>
+    <style>
+                .quiz-heading {
+                    color: red;
+                    text-align: center;
+                    font-size: 17px;
+                    font-weight: bold;
+                    margin-top: 20px;
+                }
+            </style>
+    <body>
+  <!-- Banner Section -->
+  <div class="banner">
+    <img src="banner.png" alt="Banner Image" class="banner-image">
+  </div>
+    <!-- Quiz Container -->
+  <div id="quiz-container">
+      <div id="user-info"></div> <!-- To display user name and ID -->
+    <h1 class="quiz-heading">Select any one correct option</h1>
+    <div id="mcq-questions">
+      <!-- Questions will load here dynamically -->
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script src="quiz2.js"></script>
+</body>
+</html>
+
+
+

@@ -1,51 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chapters App</title>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Grid</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+            margin: 0;
+            flex-direction: column;
+        }
+
+        .menu-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 90%;
+            max-width: 600px;
+        }
+
+        .menu-logo {
+            width: 150px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        .menu {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 10px;
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+
+        .menu li {
+            display: flex;
+            justify-content: center;
+        }
+
+        .menu a {
+            display: block;
+            padding: 12px 15px;
+            background: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s;
+            text-align: center;
+            width: 100%;
+        }
+
+        .menu a:hover {
+            background: #0056b3;
+        }
+
+        @media (max-width: 600px) {
+            .menu {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
 </head>
-
 <body>
-  <div class="home-page">
-    <!-- Heading -->
-    <h1>Welcome to the Chapters</h1>
-
-    <!-- Banner Image below heading -->
-    <div class="banner">
-            <div class="banner">
-                <img src="images/bannerimg.jpg" alt="banner image"class="scaled-image">
-            </div>
-           
+    <div class="menu-container">
+        <img src="JVS1.png" alt="Dr. Sugunakar" class="menu-logo">
+        <h2>Select chapter for multiple choice questions</h2>
+        <ul class="menu">
+            <li><a href="chap1.html">Chapter 1</a></li>
+            <li><a href="chap2.html">Chapter 2</a></li>
+            <li><a href="chap3.html">Chapter 3</a></li>
+            <li><a href="chap4.html">Chapter 4</a></li>
+            <li><a href="chap5.html">Chapter 5</a></li>
+            <li><a href="chap6.html">Chapter 6</a></li>
+            <li><a href="chap7.html">Chapter 7</a></li>
+            <li><a href="chap8.html">Chapter 8</a></li>
+            <li><a href="chap9.html">Chapter 9</a></li>
+            <li><a href="chap10.html">Chapter 10</a></li>
+            <li><a href="chap11.html">Chapter 11</a></li>
+            <li><a href="chap12.html">Chapter 12</a></li>
+        </ul>
     </div>
-
-    <!-- Chapter buttons below the image -->
-    <div id="chapter-buttons" class="chapters-grid">
-      <button class="chapter-btn" onclick="showTopics(1)">Chapter 1</button>
-      <button class="chapter-btn" onclick="showTopics(2)">Cell physio</button>
-      <button class="chapter-btn" onclick="showTopics(3)">Chapter 3</button>
-      <button class="chapter-btn" onclick="showTopics(4)">Chapter 4</button>
-      <button class="chapter-btn" onclick="showTopics(5)">Chapter 5</button>
-      <button class="chapter-btn" onclick="showTopics(6)">Chapter 6</button>
-      <button class="chapter-btn" onclick="showTopics(7)">Chapter 7</button>
-      <button class="chapter-btn" onclick="showTopics(8)">Chapter 8</button>
-      <button class="chapter-btn" onclick="showTopics(9)">Chapter 9</button>
-      <button class="chapter-btn" onclick="showTopics(10)">Chapter 10</button>
-      <button class="chapter-btn" onclick="showTopics(11)">Chapter 11</button>
-      <button class="chapter-btn" onclick="showTopics(12)">Chapter 12</button>
-    </div>
-
-    <!-- Topics container (hidden initially) -->
-    <div id="topics-container" class="topics hidden">
-      <h2 id="chapter-title">Topics for Chapter</h2>
-      <div id="topics">
-        <!-- Topics will be loaded here dynamically -->
-      </div>
-      <button onclick="goBack()" class="back-btn">Back to Chapters</button>
-    </div>
-  </div>
-
-  <script src="script.js"></script>
 </body>
 </html>
+

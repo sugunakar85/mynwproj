@@ -20,52 +20,52 @@ const mcqQuestions = [
     {
         question: "Which hormone is primarily responsible for the development of male secondary sexual characteristics?",
         options: ["Estrogen", "Progesterone", "Testosterone", "Luteinizing Hormone"],
-        answer: "Testosterone"
+        correct: 2
     },
     {
         question: "What is the process of sperm production called?",
         options: ["Oogenesis", "Spermatogenesis", "Fertilization", "Implantation"],
-        answer: "Spermatogenesis"
+        correct: 1
     },
     {
         question: "Which hormone plays a crucial role in the regulation of the menstrual cycle?",
         options: ["Insulin", "Progesterone", "Thyroxine", "Glucagon"],
-        answer: "Progesterone"
+        correct: 1
     },
     {
         question: "What marks the release of a mature egg from the ovary?",
         options: ["Menstruation", "Fertilization", "Ovulation", "Implantation"],
-        answer: "Ovulation"
+        correct: 2
     },
     {
         question: "Which phase of the menstrual cycle is dominated by progesterone?",
         options: ["Follicular phase", "Luteal phase", "Menstrual phase", "Ovulatory phase"],
-        answer: "Luteal phase"
+        correct: 1
     },
     {
         question: "Which organ is responsible for the production of estrogen and progesterone in females?",
         options: ["Ovaries", "Uterus", "Pituitary gland", "Thyroid gland"],
-        answer: "Ovaries"
+        correct: 0
     },
     {
         question: "What is the function of the corpus luteum?",
         options: ["Produces testosterone", "Releases FSH and LH", "Secretes progesterone", "Aids in implantation"],
-        answer: "Secretes progesterone"
+        correct: 2
     },
     {
         question: "Where does fertilization of the egg usually occur?",
         options: ["Uterus", "Ovary", "Fallopian tube", "Cervix"],
-        answer: "Fallopian tube"
+        correct: 2
     },
     {
         question: "Which hormone stimulates milk ejection during breastfeeding?",
         options: ["Oxytocin", "Prolactin", "Estrogen", "LH"],
-        answer: "Oxytocin"
+        answer: 0
     },
     {
         question: "Which sexually transmitted infection is caused by a virus?",
         options: ["Syphilis", "Chlamydia", "Gonorrhea", "Human Papillomavirus (HPV)"],
-        answer: "Human Papillomavirus (HPV)"
+        answer: 3
     }
 ];
 // Shuffle options for each question
@@ -93,7 +93,7 @@ function startTimer() {
         const seconds = String(timerSeconds % 60).padStart(2, '0');
         timerDisplay.textContent = `Time: 00:${minutes}:${seconds}`;
         
-        timerDisplay.style.color = timerSeconds >= 10 ? "orange" : "yellow";
+        timerDisplay.style.color = timerSeconds >= 600 ? "orange" : "yellow";
     }, 1000);
 }
 

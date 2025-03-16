@@ -60,12 +60,12 @@ const mcqQuestions = [
     {
         question: "Which hormone stimulates milk ejection during breastfeeding?",
         options: ["Oxytocin", "Prolactin", "Estrogen", "LH"],
-        answer: 0
+        correct: 0
     },
     {
         question: "Which sexually transmitted infection is caused by a virus?",
         options: ["Syphilis", "Chlamydia", "Gonorrhea", "Human Papillomavirus (HPV)"],
-        answer: 3
+        correct: 3
     }
 ];
 // Shuffle options for each question

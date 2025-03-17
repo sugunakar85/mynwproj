@@ -201,7 +201,7 @@ function saveResultsToPDF() {
     const pdf = new jsPDF();
 
     let content = `
-Quiz Results   
+MCQ Results   Chapter 1: Cell and general physiology
 
 User: ${userName}
 ID: ${userId}

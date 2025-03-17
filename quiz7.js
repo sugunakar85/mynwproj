@@ -194,7 +194,7 @@ function saveResultsToPDF() {
     const pdf = new jsPDF();
 
     let content = `
-Quiz Results   
+MCQ Results   Chapter 7: Central nervous system
 
 User: ${userName}
 ID: ${userId}

@@ -196,7 +196,7 @@ function saveResultsToPDF() {
     const pdf = new jsPDF();
 
     let content = `
-Quiz Results   
+MCQ Results   Chapter 5: Nerve muscle physiology  
 
 User: ${userName}
 ID: ${userId}

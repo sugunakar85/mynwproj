@@ -165,7 +165,7 @@ function saveResultsToPDF() {
     const pdf = new jsPDF();
 
     let content = `
-Quiz Results   
+MCQ Results   Chapter 2: Blood
 
 User: ${userName}
 ID: ${userId}

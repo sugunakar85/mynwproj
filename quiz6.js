@@ -193,7 +193,7 @@ function saveResultsToPDF() {
     const pdf = new jsPDF();
 
     let content = `
-Quiz Results   
+MCQ Results   Chapter 6: Autonomic nervous system   
 
 User: ${userName}
 ID: ${userId}

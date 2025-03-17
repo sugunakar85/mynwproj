@@ -193,7 +193,7 @@ function saveResultsToPDF() {
     const pdf = new jsPDF();
 
     let content = `
-Quiz Results   
+MCQ Results   Chapter 12: Reproductive system
 
 User: ${userName}
 ID: ${userId}

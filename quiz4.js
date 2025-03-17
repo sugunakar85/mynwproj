@@ -247,7 +247,7 @@ function saveResultsToPDF() {
     const pdf = new jsPDF();
 
     let content = `
-Quiz Results   
+MCQ Results   Chapter 4: Special senses 
 
 User: ${userName}
 ID: ${userId}

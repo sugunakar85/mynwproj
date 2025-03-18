@@ -52,6 +52,7 @@ const mcqQuestions = [
         question: "Which cranial nerve is primarily responsible for parasympathetic regulation of the heart?",
         options: ["Optic nerve (CN II)", "Vagus nerve (CN X)", "Facial nerve (CN VII)", "Trigeminal nerve (CN V)"],
         correct: 1
+    },
     {
         question: "What is the primary neurotransmitter used by the parasympathetic nervous system?",
         options: ["Norepinephrine", "Acetylcholine", "Glutamate", "Dopamine"],
@@ -68,6 +69,7 @@ const mcqQuestions = [
         correct: 1
     }
 ];
+
 // Shuffle options for each question
 mcqQuestions.forEach(shuffleOptions);
 

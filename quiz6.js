@@ -26,7 +26,7 @@ const mcqQuestions = [
     {
         question: "Which branch of the ANS is responsible for the 'fight or flight' response?",
         options: ["Sympathetic nervous system", "Parasympathetic nervous system", "Enteric nervous system", "Somatic nervous system"],
-        correct 0
+        correct: 0
     },
     {
         question: "Which neurotransmitter is primarily released by the sympathetic nervous system?",

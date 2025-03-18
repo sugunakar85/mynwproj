@@ -31,7 +31,7 @@ const mcqQuestions = [
     {
         question: "What hormone regulates water reabsorption in the kidneys?",
         options: ["Aldosterone", "Renin", "Antidiuretic hormone (ADH)", "Erythropoietin"],
-        correct: 1
+        correct: 2
     },
     {
         question: "What is the normal range for glomerular filtration rate (GFR) in healthy adults?",

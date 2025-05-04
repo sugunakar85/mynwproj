@@ -1,21 +1,22 @@
+// Get user info from URL
 const params = new URLSearchParams(window.location.search);
 const userName = params.get('name') || "Unknown User";
 const userId = params.get('id') || "No ID";
 
-
+// Timer variables
 let timerSeconds = 0;
 let timerInterval;
 
-
+// Shuffle options randomly
 const shuffleOptions = (question) => {
     let options = question.options.map((option, index) => ({ option, index }));
     options.sort(() => Math.random() - 0.5);
-    
+
     question.correct = options.findIndex(item => item.index === question.correct);
     question.options = options.map(item => item.option);
 };
 
-
+// Quiz data
 const quizData = [
     {
         question: "What is the primary function of a synapse?",
@@ -69,23 +70,28 @@ const quizData = [
     }
 ];
 
-
-
+// Shuffle all questions
 quizData.forEach(shuffleOptions);
 
+// Initialize variables
 let currentQuestionIndex = 0;
 let userResponses = [];
 
+// On page load
 document.addEventListener("DOMContentLoaded", function () {
     const quizContainer = document.getElementById("mcq-questions");
     const userInfoDiv = document.getElementById("user-info");
-    userInfoDiv.innerHTML = `<h3>User: ${userName} | ID: ${userId}</h3>
-    <div id="timer" style="font-size: 1.2rem; color: orange;">Time: 00:00:00</div>`;
+
+    userInfoDiv.innerHTML = `
+        <h3>User: ${userName} | ID: ${userId}</h3>
+        <div id="timer" style="font-size: 1.2rem; color: orange;">Time: 00:00:00</div>
+    `;
 
     startTimer();
     loadQuestion(currentQuestionIndex);
 });
 
+// Timer function
 function startTimer() {
     const timerDisplay = document.getElementById('timer');
     timerInterval = setInterval(() => {
@@ -97,6 +103,7 @@ function startTimer() {
     }, 1000);
 }
 
+// Load question
 function loadQuestion(index) {
     const quizContainer = document.getElementById('mcq-questions');
     quizContainer.innerHTML = '';
@@ -104,6 +111,7 @@ function loadQuestion(index) {
 
     const questionDiv = document.createElement('div');
     questionDiv.innerHTML = `<h3>${q.question}</h3>`;
+
     if (q.image) {
         const img = document.createElement('img');
         img.src = q.image;
@@ -111,6 +119,7 @@ function loadQuestion(index) {
         img.style.maxWidth = "200px";
         questionDiv.appendChild(img);
     }
+
     q.options.forEach((option, i) => {
         const label = document.createElement('label');
         label.innerHTML = `<input type="radio" name="q${index}" value="${i}"> ${option}`;
@@ -118,15 +127,15 @@ function loadQuestion(index) {
         questionDiv.appendChild(document.createElement('br'));
     });
 
-    if (index < quizData.length - 1) {
-        questionDiv.innerHTML += `<button onclick="validateAndProceed(${index}, ${index + 1})">Next</button>`;
-    } else {
-        questionDiv.innerHTML += `<button onclick="validateAndProceed(${index}, 'submit')">Submit</button>`;
-    }
+    const button = document.createElement('button');
+    button.textContent = index < quizData.length - 1 ? "Next" : "Submit";
+    button.onclick = () => validateAndProceed(index, index < quizData.length - 1 ? index + 1 : "submit");
+    questionDiv.appendChild(button);
 
     quizContainer.appendChild(questionDiv);
 }
 
+// Validate answer and proceed
 function validateAndProceed(currentIndex, nextAction) {
     const selected = document.querySelector(`input[name="q${currentIndex}"]:checked`);
     if (!selected) {
@@ -143,40 +152,54 @@ function validateAndProceed(currentIndex, nextAction) {
     }
 }
 
+// Save selected response
 function saveResponse(index) {
     const selected = document.querySelector(`input[name="q${index}"]:checked`);
     userResponses[index] = selected ? parseInt(selected.value) : null;
 }
 
+// Submit and display results
 function submitQuiz() {
     clearInterval(timerInterval);
 
-    let correctAnswers = 0;
+    const correctAnswers = userResponses.filter((r, i) => r === quizData[i].correct).length;
     const totalQuestions = quizData.length;
-
-    userResponses.forEach((response, i) => {
-        if (response === quizData[i].correct) {
-            correctAnswers++;
-        }
-    });
-
     const wrongAnswers = totalQuestions - correctAnswers;
     const scorePercentage = ((correctAnswers / totalQuestions) * 100).toFixed(2);
 
-    const quizContainer = document.getElementById('mcq-questions');
-    quizContainer.innerHTML = `
-      <h3>Quiz Summary</h3>
-      <p><strong>User:</strong> ${userName}</p>
-      <p><strong>ID:</strong> ${userId}</p>
-      <p><strong>Total Time:</strong> ${formatTime(timerSeconds)}</p>
-      <p><strong>Total Questions:</strong> ${totalQuestions}</p>
-      <p style="color: green;"><strong>Correct Answers:</strong> ${correctAnswers}</p>
-      <p style="color: red;"><strong>Wrong Answers:</strong> ${wrongAnswers}</p>
-      <p><strong>Score:</strong> ${scorePercentage}%</p>
-      <button onclick="saveResultsToPDF()">Download Report</button>
+    let resultHTML = `
+        <h3>Quiz Summary</h3>
+        <p><strong>User:</strong> ${userName}</p>
+        <p><strong>ID:</strong> ${userId}</p>
+        <p><strong>Total Time:</strong> ${formatTime(timerSeconds)}</p>
+        <p><strong>Total Questions:</strong> ${totalQuestions}</p>
+        <p style="color: green;"><strong>Correct Answers:</strong> ${correctAnswers}</p>
+        <p style="color: red;"><strong>Wrong Answers:</strong> ${wrongAnswers}</p>
+        <p><strong>Score:</strong> ${scorePercentage}%</p>
     `;
+
+    if (parseFloat(scorePercentage) === 100) {
+        resultHTML += `
+            <div style="text-align:center; margin-top:20px;">
+                <h2 style="color:green;">🎉 Congratulations! You got a perfect score! 🎉</h2>
+                <img src="images/congrats.png" style="max-width:300px; border-radius:10px; margin-top:10px;">
+            </div>
+        `;
+    }
+
+    resultHTML += `<button onclick="saveResultsToPDF()">Download Report</button>`;
+
+    document.getElementById("mcq-questions").innerHTML = resultHTML;
 }
 
+// Format time display
+function formatTime(totalSeconds) {
+    const minutes = String(Math.floor(totalSeconds / 60)).padStart(2, '0');
+    const seconds = String(totalSeconds % 60).padStart(2, '0');
+    return `00:${minutes}:${seconds}`;
+}
+
+// Save results as PDF
 function saveResultsToPDF() {
     const { jsPDF } = window.jspdf;
     const pdf = new jsPDF();
@@ -204,11 +227,5 @@ Correct Answer: ${q.options[q.correct]}
     pdf.text(lines, 10, 10);
 
     pdf.save(`quiz_results_${userName}_${Date.now()}.pdf`);
-}
-
-function formatTime(totalSeconds) {
-    const minutes = String(Math.floor(totalSeconds / 60)).padStart(2, '0');
-    const seconds = String(totalSeconds % 60).padStart(2, '0');
-    return `00:${minutes}:${seconds}`;
 }
 

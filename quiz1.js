@@ -1,3 +1,4 @@
+
 const params = new URLSearchParams(window.location.search);
 const userName = params.get('name') || "Unknown User";
 const userId = params.get('id') || "No ID";
@@ -6,10 +7,11 @@ const userId = params.get('id') || "No ID";
 let timerSeconds = 0;
 let timerInterval;
 
+
 const shuffleOptions = (question) => {
     let options = question.options.map((option, index) => ({ option, index }));
     options.sort(() => Math.random() - 0.5);
-    
+
     question.correct = options.findIndex(item => item.index === question.correct);
     question.options = options.map(item => item.option);
 };
@@ -72,21 +74,26 @@ const quizData = [
    ];
 
 
-
 quizData.forEach(shuffleOptions);
+
 
 let currentQuestionIndex = 0;
 let userResponses = [];
 
+
 document.addEventListener("DOMContentLoaded", function () {
     const quizContainer = document.getElementById("mcq-questions");
     const userInfoDiv = document.getElementById("user-info");
-    userInfoDiv.innerHTML = `<h3>User: ${userName} | ID: ${userId}</h3>
-    <div id="timer" style="font-size: 1.2rem; color: orange;">Time: 00:00:00</div>`;
+
+    userInfoDiv.innerHTML = `
+        <h3>User: ${userName} | ID: ${userId}</h3>
+        <div id="timer" style="font-size: 1.2rem; color: orange;">Time: 00:00:00</div>
+    `;
 
     startTimer();
     loadQuestion(currentQuestionIndex);
 });
+
 
 function startTimer() {
     const timerDisplay = document.getElementById('timer');
@@ -99,6 +106,7 @@ function startTimer() {
     }, 1000);
 }
 
+
 function loadQuestion(index) {
     const quizContainer = document.getElementById('mcq-questions');
     quizContainer.innerHTML = '';
@@ -106,6 +114,7 @@ function loadQuestion(index) {
 
     const questionDiv = document.createElement('div');
     questionDiv.innerHTML = `<h3>${q.question}</h3>`;
+
     if (q.image) {
         const img = document.createElement('img');
         img.src = q.image;
@@ -113,6 +122,7 @@ function loadQuestion(index) {
         img.style.maxWidth = "200px";
         questionDiv.appendChild(img);
     }
+
     q.options.forEach((option, i) => {
         const label = document.createElement('label');
         label.innerHTML = `<input type="radio" name="q${index}" value="${i}"> ${option}`;
@@ -120,14 +130,14 @@ function loadQuestion(index) {
         questionDiv.appendChild(document.createElement('br'));
     });
 
-    if (index < quizData.length - 1) {
-        questionDiv.innerHTML += `<button onclick="validateAndProceed(${index}, ${index + 1})">Next</button>`;
-    } else {
-        questionDiv.innerHTML += `<button onclick="validateAndProceed(${index}, 'submit')">Submit</button>`;
-    }
+    const button = document.createElement('button');
+    button.textContent = index < quizData.length - 1 ? "Next" : "Submit";
+    button.onclick = () => validateAndProceed(index, index < quizData.length - 1 ? index + 1 : "submit");
+    questionDiv.appendChild(button);
 
     quizContainer.appendChild(questionDiv);
 }
+
 
 function validateAndProceed(currentIndex, nextAction) {
     const selected = document.querySelector(`input[name="q${currentIndex}"]:checked`);
@@ -145,6 +155,7 @@ function validateAndProceed(currentIndex, nextAction) {
     }
 }
 
+
 function saveResponse(index) {
     const selected = document.querySelector(`input[name="q${index}"]:checked`);
     userResponses[index] = selected ? parseInt(selected.value) : null;
@@ -153,30 +164,40 @@ function saveResponse(index) {
 function submitQuiz() {
     clearInterval(timerInterval);
 
-    let correctAnswers = 0;
+    const correctAnswers = userResponses.filter((r, i) => r === quizData[i].correct).length;
     const totalQuestions = quizData.length;
-
-    userResponses.forEach((response, i) => {
-        if (response === quizData[i].correct) {
-            correctAnswers++;
-        }
-    });
-
     const wrongAnswers = totalQuestions - correctAnswers;
     const scorePercentage = ((correctAnswers / totalQuestions) * 100).toFixed(2);
 
-    const quizContainer = document.getElementById('mcq-questions');
-    quizContainer.innerHTML = `
-      <h3>Quiz Summary</h3>
-      <p><strong>User:</strong> ${userName}</p>
-      <p><strong>ID:</strong> ${userId}</p>
-      <p><strong>Total Time:</strong> ${formatTime(timerSeconds)}</p>
-      <p><strong>Total Questions:</strong> ${totalQuestions}</p>
-      <p style="color: green;"><strong>Correct Answers:</strong> ${correctAnswers}</p>
-      <p style="color: red;"><strong>Wrong Answers:</strong> ${wrongAnswers}</p>
-      <p><strong>Score:</strong> ${scorePercentage}%</p>
-      <button onclick="saveResultsToPDF()">Download Report</button>
+    let resultHTML = `
+        <h3>Quiz Summary</h3>
+        <p><strong>User:</strong> ${userName}</p>
+        <p><strong>ID:</strong> ${userId}</p>
+        <p><strong>Total Time:</strong> ${formatTime(timerSeconds)}</p>
+        <p><strong>Total Questions:</strong> ${totalQuestions}</p>
+        <p style="color: green;"><strong>Correct Answers:</strong> ${correctAnswers}</p>
+        <p style="color: red;"><strong>Wrong Answers:</strong> ${wrongAnswers}</p>
+        <p><strong>Score:</strong> ${scorePercentage}%</p>
     `;
+
+    if (parseFloat(scorePercentage) === 100) {
+        resultHTML += `
+            <div style="text-align:center; margin-top:20px;">
+                <h2 style="color:green;">🎉 Congratulations! You got a perfect score! 🎉</h2>
+            </div>
+        `;
+    }
+
+    resultHTML += `<button onclick="saveResultsToPDF()">Download Report</button>`;
+
+    document.getElementById("mcq-questions").innerHTML = resultHTML;
+}
+
+
+function formatTime(totalSeconds) {
+    const minutes = String(Math.floor(totalSeconds / 60)).padStart(2, '0');
+    const seconds = String(totalSeconds % 60).padStart(2, '0');
+    return `00:${minutes}:${seconds}`;
 }
 
 function saveResultsToPDF() {
@@ -184,7 +205,7 @@ function saveResultsToPDF() {
     const pdf = new jsPDF();
 
     let content = `
-MCQ Results: Cell and General physiology - Chapter 1
+MCQ Results: Cell and general physiology - Chapter 1
 User: ${userName}
 ID: ${userId}
 Total Time: ${formatTime(timerSeconds)}
@@ -206,11 +227,5 @@ Correct Answer: ${q.options[q.correct]}
     pdf.text(lines, 10, 10);
 
     pdf.save(`quiz_results_${userName}_${Date.now()}.pdf`);
-}
-
-function formatTime(totalSeconds) {
-    const minutes = String(Math.floor(totalSeconds / 60)).padStart(2, '0');
-    const seconds = String(totalSeconds % 60).padStart(2, '0');
-    return `00:${minutes}:${seconds}`;
 }
 

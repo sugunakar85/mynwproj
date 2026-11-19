@@ -1,104 +1,280 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <title>Menu Grid</title>
-                <link rel="stylesheet" href="styles.css">
-                    <style>
-                        body {
-                            font-family: Arial, sans-serif;
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;
-                            min-height: 100dvh;
-                            background-color: #f4f4f4;
-                            margin: 0;
-                            padding: 12px;
-                            flex-direction: column;
-                        }
-                        
-                        .menu-container {
-                            background: white;
-                            padding: 20px;
-                            border-radius: 8px;
-                            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-                            text-align: center;
-                            width: 90%;
-                            max-width: 600px;
-                        }
-                        
-                        .menu-logo {
-                            width: 150px;
-                            height: auto;
-                            margin-bottom: 10px;
-                        }
-                        
-                        .menu {
-                            display: grid;
-                            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-                            gap: 10px;
-                            padding: 0;
-                            margin: 0;
-                            list-style: none;
-                        }
-                        
-                        .menu li {
-                            display: flex;
-                            justify-content: center;
-                        }
-                        
-                        .menu a {
-                            display: block;
-                            padding: 12px 15px;
-                            background: #007bff;
-                            color: white;
-                            text-decoration: none;
-                            border-radius: 5px;
-                            transition: background 0.3s;
-                            text-align: center;
-                            width: 100%;
-                        }
-                        
-                        .menu a:hover {
-                            background: #0056b3;
-                        }
-                        
-                        @media (max-width: 600px) {
-                            .menu {
-                                grid-template-columns: repeat(2, 1fr);
-                            }
-                        }
-                    </style>
-    </head>
-    <body>
-        <div class="menu-container">
-            <img src="JVS1.png" alt="Dr. Sugunakar" class="menu-logo">
-                <h2>Select chapter for multiple choice questions</h2>
-                <ul class="menu">
-                    <li><a href="chap1.html">Chapter 1</a></li>
-                    <li><a href="chap2.html">Chapter 2</a></li>
-                    <li><a href="chap3.html">Chapter 3</a></li>
-                    <li><a href="chap4.html">Chapter 4</a></li>
-                    <li><a href="chap5.html">Chapter 5</a></li>
-                    <li><a href="chap6.html">Chapter 6</a></li>
-                    <li><a href="chap7.html">Chapter 7</a></li>
-                    <li><a href="chap8.html">Chapter 8</a></li>
-                    <li><a href="chap9.html">Chapter 9</a></li>
-                    <li><a href="chap10.html">Chapter 10</a></li>
-                    <li><a href="chap11.html">Chapter 11</a></li>
-                    <li><a href="chap12.html">Chapter 12</a></li>
-                </ul>
-        </div>
-    </body>
-    <footer style="text-align: center; padding: 15px 0; color: #555; font-family: 'Segoe UI', sans-serif;">
-      <div style="text-align: center;">
-        <p style="margin: 5px 0;">&copy; 2025 <strong>JVS Edtek</strong>. All rights reserved.</p>
-        <p style="margin: 0; font-size: 0.85em; color: #777;">
-           Contact: <a href="mailto:myworks.jvs@gmail.com" target="_blank" rel="noopener noreferrer" style="color: #777; text-decoration: none;">myworks.jvs@gmail.com</a>
-        </p>
-      </div>
-    </footer>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Menu Grid</title>
+  <meta name="description" content="Select a chapter for multiple choice questions." />
 
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #fafafa;
+      --surface: #ffffff;
+      --border: #e8e8ea;
+      --text: #18181b;
+      --text-muted: #71717a;
+      --accent: #27272a;
+      --accent-hover: #000000;
+      --chip: #f4f4f5;
+      --chip-hover: #27272a;
+      --radius: 20px;
+      --shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 12px 40px rgba(0, 0, 0, 0.06);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 16px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ---------- Card ---------- */
+    .menu-container {
+      width: 100%;
+      max-width: 620px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 16px 16px 32px;
+    }
+
+    /* ---------- Card header (logo) ---------- */
+    .brand-head {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 12px 18px;
+    }
+    .brand-head img {
+      height: 52px;
+      width: auto;
+      max-width: 100%;
+      object-fit: contain;
+      display: block;
+    }
+    .brand-head .brand-fallback {
+      display: none;
+      font-size: 1.15rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+    .brand-head.empty img { display: none; }
+    .brand-head.empty .brand-fallback { display: block; }
+
+    /* ---------- Image frame (book cover, shown in full, no cropping) ---------- */
+    .image-frame {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      padding: 16px;
+      border-radius: 14px;
+      overflow: hidden;
+      background: var(--chip);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .image-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+    .image-frame.empty img { display: none; }
+    .image-frame.empty::after {
+      content: "Add book-cover.jpg";
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    /* ---------- Text ---------- */
+    .content { padding: 26px 12px 0; text-align: center; }
+
+    .eyebrow {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: var(--text-muted);
+      margin-bottom: 26px;
+    }
+
+    /* ---------- Chapter grid ---------- */
+    .menu {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 10px;
+      list-style: none;
+      margin-bottom: 30px;
+    }
+
+    .menu a {
+      display: block;
+      width: 100%;
+      padding: 12px 14px;
+      background: var(--chip);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      text-decoration: none;
+      text-align: center;
+      transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+    }
+    .menu a:hover {
+      background: var(--chip-hover);
+      border-color: var(--chip-hover);
+      color: #fff;
+      transform: translateY(-1px);
+    }
+    .menu a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+    /* ---------- Download button ---------- */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--accent);
+      color: #fff;
+      font: inherit;
+      font-size: 0.92rem;
+      font-weight: 500;
+      text-decoration: none;
+      padding: 13px 26px;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .btn:hover {
+      background: var(--accent-hover);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+    .btn:active { transform: translateY(0); }
+    .btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+    .btn svg { width: 18px; height: 18px; }
+
+    /* ---------- Footer ---------- */
+    footer {
+      text-align: center;
+      padding: 24px 0 0;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+    footer p { margin: 4px 0; }
+    footer strong { color: var(--text); font-weight: 600; }
+    footer .contact { font-size: 0.8rem; }
+    footer a { color: inherit; text-decoration: none; transition: color 0.2s ease; }
+    footer a:hover { color: var(--text); }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 480px) {
+      .menu-container { padding: 12px 12px 26px; }
+      .menu { grid-template-columns: repeat(2, 1fr); }
+      .brand-head img { height: 44px; }
+      h2 { font-size: 1.3rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <main class="menu-container">
+
+    <!-- Card header: logo -->
+    <header class="brand-head" id="head">
+      <img src="JVS1.png" alt="JVS Edtek logo" id="logo" />
+      <span class="brand-fallback">JVS Edtek</span>
+    </header>
+
+    <!-- Frame: book cover -->
+    <div class="image-frame" id="frame">
+      <img src="qbank.png" alt="Book cover" id="cover" />
+    </div>
+
+    <div class="content">
+      <div class="eyebrow">Multiple Choice Questions</div>
+      <h2>Select a chapter</h2>
+      <p class="subtitle">Use "Myrating" App to use the downloaded file</p>
+      
+
+      <ul class="menu">
+        <li><a href="chap1.html">Chapter 1</a></li>
+        <li><a href="chap2.html">Chapter 2</a></li>
+        <li><a href="chap3.html">Chapter 3</a></li>
+        <li><a href="chap4.html">Chapter 4</a></li>
+        <li><a href="chap5.html">Chapter 5</a></li>
+        <li><a href="chap6.html">Chapter 6</a></li>
+        <li><a href="chap7.html">Chapter 7</a></li>
+        <li><a href="chap8.html">Chapter 8</a></li>
+        <li><a href="chap9.html">Chapter 9</a></li>
+        <li><a href="chap10.html">Chapter 10</a></li>
+        <li><a href="chap11.html">Chapter 11</a></li>
+        <li><a href="chap12.html">Chapter 12</a></li>
+      </ul>
+
+      <!-- 
+           Change href/download to point at any file you want visitors to download -->
+      <a class="btn" href="https://github.com/user-attachments/files/35078650/AllQuestions.csv" download="book-cover.jpg">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 3v12"/>
+          <path d="M7 11l5 5 5-5"/>
+          <path d="M5 21h14"/>
+        </svg>
+        Download
+      </a>
+      <!-- Replace the href with your MyRating app link -->
+      <div>
+        <a class="rate-link" href="https://myworks-jvs.github.io/" target="_blank" rel="noopener noreferrer">
+          Rate this app
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 <strong>JVS Edtek</strong>. All rights reserved.</p>
+    <p class="contact">
+      Contact:
+      <a href="mailto:myworks.jvs@gmail.com" target="_blank" rel="noopener noreferrer">myworks.jvs@gmail.com</a>
+    </p>
+  </footer>
+
+  <script>
+    // Tidy fallbacks if an image is missing
+    document.getElementById("logo").addEventListener("error", () =>
+      document.getElementById("head").classList.add("empty"));
+    document.getElementById("cover").addEventListener("error", () =>
+      document.getElementById("frame").classList.add("empty"));
+  </script>
+</body>
 </html>
 

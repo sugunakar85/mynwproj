@@ -50,6 +50,34 @@
       box-shadow: var(--shadow);
       padding: 16px 16px 32px;
     }
+      /* ---------- Rating app link ---------- */
+      .rate-wrap {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+      }
+      .rate-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        font-size: 0.85rem;
+        font-weight: 500;
+        line-height: 1.4;
+        text-align: center;
+        color: var(--text-muted);
+        text-decoration: none;
+        transition: color 0.2s ease;
+      }
+      .rate-link:hover { color: var(--text); }
+      .rate-link { flex-direction: column; gap: 6px; }
+      .rate-icon {
+        width: 55px;
+        height: 55px;
+        flex-shrink: 0;
+        object-fit: justify-content;
+        border-radius: 5px;
+      }
 
     /* ---------- Card header (logo) ---------- */
     .brand-head {
@@ -223,6 +251,8 @@
     <div class="content">
       <div class="eyebrow">Multiple Choice Questions</div>
       <h2>Select a chapter</h2>
+      
+      
 
       <ul class="menu">
         <li><a href="chap1.html">Chapter 1</a></li>
@@ -239,22 +269,28 @@
         <li><a href="chap12.html">Chapter 12</a></li>
       </ul>
 
-      <!-- 
+      <!-- Downloads the book cover shown in the frame.
            Change href/download to point at any file you want visitors to download -->
-      <a class="btn" href="https://github.com/user-attachments/files/35078650/AllQuestions.csv" download="book-cover.jpg">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <a class="btn" href="https://github.com/user-attachments/files/35078650/AllQuestions.csv" download="AllQuestions.csv">
+        <svg class="file-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/>
+          <path d="M14 3v5h5"/>
+          <path d="M9 13h6M9 17h6M12 11v8"/>
+        </svg>
+        Download
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M12 3v12"/>
           <path d="M7 11l5 5 5-5"/>
           <path d="M5 21h14"/>
         </svg>
-        Download
       </a>
-       <p class="subtitle"></p>
       <!-- Replace the href with your MyRating app link -->
-      <div>
+      <div class="rate-wrap">
         <a class="rate-link" href="https://myworks-jvs.github.io/#products" target="_blank" rel="noopener noreferrer">
+          <img src="app_icon.png" alt="" class="rate-icon" />
           Get "Myrating" App to use the downloaded file
         </a>
+      </div>
       </div>
     </div>
   </main>
